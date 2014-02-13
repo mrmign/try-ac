@@ -3,7 +3,9 @@
  * Copyright (C) 2014 Arming lee <cloudniw1@gmail.com>
  *
  * Distributed under terms of the MIT license.
+ * 
  * 从尾到头打印链表
+ *
  * */
 
 //#include<iostream>
