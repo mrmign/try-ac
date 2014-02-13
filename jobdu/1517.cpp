@@ -13,55 +13,78 @@ using namespace std;
 struct ListNode{
     int value;
     ListNode *next;
+    ListNode(int x):value(x), next(NULL){  };
 };
-void backNth(ListNode **header, int n);
+
+ListNode *backNth(ListNode *header,int num, int n);
+void deleteListNode(ListNode *header);
 int main()
 {
     int n, val, num;
-    ListNode **header = NULL;
+    ListNode *header = NULL;
     ListNode *p;
     while(scanf("%d %d", &num, &n) != EOF){
-        if(num ==0 || n == 0){
-            printf("NULL\n");
-            continue;
-        }
-        while(num--){
-           ListNode *ln = new ListNode; 
-           //scanf("%d", &(ln->value)); 
+        int c = num;
+        while(c--){
            scanf("%d", &val); 
-           ln->value = val;
-           ln->next = NULL;
+           ListNode *ln = new ListNode(val); 
+           //ln->value = val;
+           //ln->next = NULL;
            if(header == NULL){
                p = ln;
-               header = &ln;
+               header = ln;
            }
            else{
                p->next = ln;
                p = ln;
            }
         }
-        backNth(header, n);
+        ListNode *it = header;
+        //while(it){
+        //    printf("%d ", it->value);
+        //    it = it->next;
+        //}
+        ListNode * ret = backNth(header, num, n);
+        if(ret)
+            printf("%d\n", ret->value);
+        else
+            printf("NULL\n");
+        deleteListNode(header);
         header = NULL;
     }
     return 0;
 }
 
-void backNth(ListNode **header, int n)
+ListNode *backNth(ListNode *header,int num, int n)
 {
     if(header == NULL)
-        return;
+        return NULL;
+    if(n > num || n == 0)
+        return NULL;
+    if(n == num)
+        return header;
     ListNode *p, *q;
-    p = *header, q = *header;
+    p = header, q = header;
     int c = n;
-    while((c--, c>0) && p != NULL)
+    //while((c--, c>0) && p != NULL)
+    while(--c){
         p = p->next;
-    if(p == NULL){
-        printf("NULL\n");
-        return;
     }
     while(p->next != NULL){
         p = p->next;
         q = q->next;
     }
-    printf("aa%d\n", q->value);
+    //printf("aa%d\n", q->value);
+    return q;
 }
+
+void deleteListNode(ListNode *header)
+{
+    ListNode *p = header;
+    while(p){
+        header = p->next;
+        delete p;
+        p = header;
+    }
+}
+
