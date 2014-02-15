@@ -61,7 +61,7 @@ ListNode * initList(int n)
     }    
     return head;
 }
-ListNode *reverseList(ListNode *head)
+/*ListNode *reverseList(ListNode *head)
 {
    if(head == NULL)
        return NULL;
@@ -80,5 +80,31 @@ ListNode *reverseList(ListNode *head)
    }
    head->next = NULL;
    return tail;
+}*/
+ListNode *reverseList(ListNode *head)
+{
+    ListNode *reverseHead = NULL;
+    ListNode *cur = head;
+    ListNode *prev = NULL;
+    while(cur){
+        ListNode *p = cur->next;
+        if(p == NULL)
+            reverseHead = cur;
+        cur->next = prev;
+        prev = cur;
+        cur = p;
+    }
+    return reverseHead;
+    /*if(head->next == NULL)
+        return head;
+    ListNode *prev = NULL;
+    ListNode *newHeader = head;
+    ListNode *nex = head->next;
+    while(nex){
+        nex = newHeader->next;
+        newHeader->next = prev;
+        prev = newHeader;
+        newHeader = nex;
+    }
+    return newHeader;*/
 }
-
