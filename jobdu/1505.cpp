@@ -4,7 +4,7 @@
  *
  * Distributed under terms of the MIT license.
  *
- * 两个链表的第一个公共结点 
+ * 37.两个链表的第一个公共结点 
  *
  */
 
