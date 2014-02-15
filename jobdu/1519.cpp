@@ -59,8 +59,10 @@ ListNode *initList(int n)
     return head;
 }
 
-ListNode *mergeList(ListNode *first, ListNode *second)
-{
+/*
+ * 非递归解法
+ */
+/*ListNode *mergeList(ListNode *first, ListNode *second) {
     if(first == NULL)
         return second;
     if(second == NULL)
@@ -85,4 +87,26 @@ ListNode *mergeList(ListNode *first, ListNode *second)
     if(q)
         t->next = q;
     return merge;
+}*/
+
+/*
+ * 递归解法
+ */
+ListNode *mergeList(ListNode *first, ListNode *second)
+{
+    if(first == NULL)
+        return second;
+    if(second == NULL)
+        return first;
+    ListNode *mergeHeader = NULL;
+    if(first->value <= second->value){
+        mergeHeader = first;
+        mergeHeader->next = mergeList(first->next, second);
+    }
+    else{
+        mergeHeader = second;
+        mergeHeader->next = mergeList(first, second->next);
+    }
+    return mergeHeader;
 }
+
