@@ -104,7 +104,8 @@ ListNode *reverseList(ListNode *head)
         nex = newHeader->next;
         newHeader->next = prev;
         prev = newHeader;
-        newHeader = nex;
+        if(nex)
+            newHeader = nex;
     }
     return newHeader;*/
 }
