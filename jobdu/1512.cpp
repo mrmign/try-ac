@@ -10,7 +10,10 @@
 #include<string>
 #include<iostream>
 using namespace std;
-int dequeue(stack<int> &s1, stack<int> &s2)
+/*
+ * 用两个栈实现一个队列
+ */
+/*int dequeue(stack<int> &s1, stack<int> &s2)
 {
     if(s1.empty() && s2.empty())
         return -1;
@@ -53,7 +56,58 @@ int main()
         }
     }
     return 0;
+}*/
+
+/*
+ * 用两个队列实现栈
+ */
+#include<queue>
+int pop_stack(queue<int> &q1, queue<int> &q2)
+{
+    if(q1.empty() && q2.empty())
+        return -1;
+    if(q1.empty()){
+        while(q2.size() != 1){
+            q1.push(q2.front());
+            q2.pop();
+        }
+        int r = q2.front();
+        q2.pop();
+        return r;
+    }
+    else{
+        while(q1.size() != 1){
+            q2.push(q1.front());
+            q1.pop();
+        }
+        int r = q1.front();
+        q1.pop();
+        return r;
+    }
 }
 
+int main()
+{
+    string op;
+    int n;
+    int v;
+    queue<int> q1, q2;
+    scanf("%d", &n);
+    while(n--){
+        cin>>op;
+        if(op == "PUSH"){
+            scanf("%d", &v);
+            if(q1.empty() && q2.empty() || q2.empty()){
+                q1.push(v);
+            }
+            else if(q1.empty()){
+                q2.push(v);
 
-
+            }
+        }
+        else{
+            printf("%d\n",pop_stack(q1, q2) );
+        }
+    }
+    return 0;
+}
